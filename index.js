@@ -2,18 +2,18 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const passport = require('passport')
-const keys = require('./config/keys').mongoURI
-
+const keys = require('./config/keys')
+const cookieSession = require('cookie-session')
 //Load models
 require('./models/User')
 
 require('./config/passport')(passport)
 
-const auth = require('./routes/api/auth')
+const auth = require('./routes/auth')
 
 mongoose
   .connect(
-    keys,
+    keys.mongoURI,
     { useNewUrlParser: true }
   )
   .then(() => console.log('MongoDB Connected'))
@@ -22,13 +22,19 @@ mongoose
 const app = express()
 
 app.use(bodyParser.json())
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+)
 
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/auth', auth)
+require('./routes/auth')(app)
 
-app.get('/api/test', (req, res) => {
+app.get('/test', (req, res) => {
   res.send('Test')
 })
 

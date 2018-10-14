@@ -1,32 +1,51 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class Navbar extends Component {
-  render() {
-    return (
-      <div className="navbar navbar-full navbar-light bg-faded">
-        <div className="container">
-          <span className="navbar-brand">TwitterClone</span>
-          <ul className="nav  pull-xs-right">
+  renderContent() {
+    switch (this.props.auth) {
+      case null:
+        return
+      case false:
+        return (
+          <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                About
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Blog
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Contact
-              </a>
+              <a href="/auth/google">Login with Google</a>
             </li>
           </ul>
-        </div>
-      </div>
+        )
+      default:
+        return [
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a href="/api/logout">Logout</a>
+            </li>
+          </ul>
+        ]
+    }
+  }
+
+  render() {
+    return (
+      <nav
+        className="navbar navbar-light"
+        style={{ backgroundColor: '#e3f2fd' }}
+      >
+        <Link
+          to={this.props.auth ? '/dashboard' : '/'}
+          className="left brand-logo"
+        >
+          TwitterClone
+        </Link>
+        <ul className="navbar-nav">{this.renderContent()}</ul>
+      </nav>
     )
   }
 }
 
-export default Navbar
+const mapStateToProps = ({ auth }) => {
+  return { auth }
+}
+
+export default connect(mapStateToProps)(Navbar)
