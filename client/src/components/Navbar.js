@@ -11,7 +11,7 @@ class Navbar extends Component {
         return (
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a href="/auth/google">Login with Google</a>
+              <a href="/auth/google">Login</a>
             </li>
           </ul>
         )
@@ -30,14 +30,20 @@ class Navbar extends Component {
     return (
       <nav
         className="navbar navbar-light"
-        style={{ backgroundColor: '#e3f2fd' }}
+        style={{ backgroundColor: '#fff', borderBottom: '1px solid #80808094' }}
       >
         <Link
           to={this.props.auth ? '/dashboard' : '/'}
           className="left brand-logo"
         >
-          TwitterClone
+          <i class="fas fa-home" />
+          Home
         </Link>
+
+        <ul className="twitter-logo">
+          <i class="fab fa-twitter fa-lg" style={{ color: '#1da1f2' }} />
+        </ul>
+
         <ul className="navbar-nav">{this.renderContent()}</ul>
       </nav>
     )

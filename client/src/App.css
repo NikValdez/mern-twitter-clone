@@ -1,0 +1,16 @@
+a,
+a:hover {
+  text-decoration: none;
+}
+
+.fa-home,
+.brand-logo,
+a {
+  color: #0084b4;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.twitter-logo {
+  margin: 5px;
+}
