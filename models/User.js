@@ -19,8 +19,12 @@ const UserSchema = new Schema({
   },
   image: {
     type: String
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 })
 
 // Create collection and add schema
-mongoose.model('users', UserSchema)
+module.exports = User = mongoose.model('users', UserSchema)

@@ -36,12 +36,12 @@ class Navbar extends Component {
           to={this.props.auth ? '/dashboard' : '/'}
           className="left brand-logo"
         >
-          <i class="fas fa-home" />
+          <i className="fas fa-home" />
           Home
         </Link>
 
         <ul className="twitter-logo">
-          <i class="fab fa-twitter fa-lg" style={{ color: '#1da1f2' }} />
+          <i className="fab fa-twitter fa-lg" style={{ color: '#1da1f2' }} />
         </ul>
 
         <ul className="navbar-nav">{this.renderContent()}</ul>

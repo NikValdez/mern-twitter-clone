@@ -6,10 +6,9 @@ const keys = require('./config/keys')
 const cookieSession = require('cookie-session')
 //Load models
 require('./models/User')
+require('./models/Post')
 
 require('./config/passport')(passport)
-
-const auth = require('./routes/auth')
 
 mongoose
   .connect(
@@ -20,6 +19,11 @@ mongoose
   .catch(err => console.log(err))
 
 const app = express()
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+)
 
 app.use(bodyParser.json())
 app.use(
@@ -33,6 +37,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 require('./routes/auth')(app)
+require('./routes/posts')(app)
 
 app.get('/test', (req, res) => {
   res.send('Test')
