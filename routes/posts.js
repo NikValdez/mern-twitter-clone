@@ -5,12 +5,9 @@ const express = require('express')
 const Post = require('../models/Post')
 
 module.exports = app => {
-  app.get('/api/post', (req, res) => {
-    res.send('Post')
-  })
-
   //Get all Posts
   app.get('/api/posts', (req, res) => {
+    console.log(res)
     Post.find()
       .sort({ date: -1 })
       .then(posts => res.json(posts))
@@ -21,7 +18,8 @@ module.exports = app => {
   app.post('/api/posts', (req, res) => {
     const newPost = new Post({
       text: req.body.text,
-      name: req.body.name
+      name: req.body.name,
+      image: req.body.image
     })
 
     newPost.save().then(post => res.json(post))
