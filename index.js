@@ -6,7 +6,7 @@ const keys = require('./config/keys')
 const cookieSession = require('cookie-session')
 //Load models
 require('./models/User')
-require('./models/Post')
+const posts = require('./routes/api/posts')
 
 require('./config/passport')(passport)
 
@@ -37,7 +37,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 require('./routes/auth')(app)
-require('./routes/posts')(app)
+app.use('/api/posts', posts)
 
 app.get('/test', (req, res) => {
   res.send('Test')

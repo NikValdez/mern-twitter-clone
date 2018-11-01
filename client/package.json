@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "http-proxy-middleware": "^0.19.0",
     "react": "^16.5.2",
@@ -10,6 +11,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
+    "react-spring": "^6.1.6",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0"
   },
@@ -19,6 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"
   },

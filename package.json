@@ -22,6 +22,7 @@
     "nodemon": "^1.18.4",
     "npm": "^6.4.1",
     "passport": "^0.4.0",
-    "passport-google-oauth20": "^1.0.0"
+    "passport-google-oauth20": "^1.0.0",
+    "validator": "^10.8.0"
   }
 }

@@ -29,3 +29,9 @@ a {
   background: #1da1f2;
   border-radius: 100px;
 }
+
+.animated {
+  animation-duration: 2.5s;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}

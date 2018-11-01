@@ -1,5 +1,11 @@
 import axios from 'axios'
-import { FETCH_USER, FETCH_POSTS, ADD_POST } from './types'
+import {
+  FETCH_USER,
+  FETCH_POSTS,
+  ADD_POST,
+  DELETE_POST,
+  GET_ERRORS
+} from './types'
 
 //Get user
 export const fetchUser = () => async dispatch => {
@@ -20,4 +26,14 @@ export const addPost = postData => async dispatch => {
     type: ADD_POST,
     payload: res.data
   })
+}
+
+//Delete Post
+export const deletePost = id => dispatch => {
+  axios.delete(`/api/posts/${id}`).then(res =>
+    dispatch({
+      type: DELETE_POST,
+      payload: id
+    })
+  )
 }

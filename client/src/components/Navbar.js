@@ -17,7 +17,7 @@ class Navbar extends Component {
         )
       default:
         return [
-          <ul className="navbar-nav">
+          <ul className="navbar-nav" key={this.props.auth._id}>
             <li className="nav-item">
               <a href="/api/logout">Logout</a>
             </li>

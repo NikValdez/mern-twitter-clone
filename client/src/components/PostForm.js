@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addPost } from '../actions'
+import { Transition } from 'react-spring'
 
 class PostForm extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      text: ''
+      text: '',
+      textError: ''
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -17,19 +19,40 @@ class PostForm extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  validate = () => {
+    let isError = false
+    const errors = {}
+    if (this.state.text.length < 1 || this.state.text.length > 280) {
+      isError = true
+      errors.textError = 'Post must be between 1 and 280 characters'
+    }
+
+    if (isError) {
+      this.setState({
+        ...this.state,
+        ...errors
+      })
+    }
+
+    return isError
+  }
+
   onSubmit(e) {
     e.preventDefault()
 
     const { firstName, image } = this.props.auth
-
-    const newPost = {
-      text: this.state.text,
-      name: firstName,
-      image: image
+    //check for errors
+    const err = this.validate()
+    if (!err) {
+      const newPost = {
+        text: this.state.text,
+        name: firstName,
+        image: image
+      }
+      this.props.addPost(newPost)
+      this.setState({ text: '' })
+      this.props.history.push('/dashboard')
     }
-    this.props.addPost(newPost)
-    this.setState({ text: '' })
-    this.props.history.push('/dashboard')
   }
 
   render() {
@@ -49,7 +72,11 @@ class PostForm extends Component {
                   value={this.state.text}
                   onChange={this.onChange}
                 />
+                <div className="animated lightSpeedIn">
+                  {this.state.textError}
+                </div>
               </div>
+
               <button type="submit" className="btn btn-dark">
                 Submit
               </button>
