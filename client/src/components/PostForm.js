@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addPost } from '../actions'
-import { Transition } from 'react-spring'
 
 class PostForm extends Component {
   constructor(props) {
