@@ -49,7 +49,11 @@ class CommentForm extends Component {
                   error={errors.text}
                 />
               </div>
-              <button type="submit" className="btn btn-dark">
+              <button
+                type="submit"
+                className="btn btn-dark"
+                onClick={this.props.handleClose}
+              >
                 Submit
               </button>
             </form>

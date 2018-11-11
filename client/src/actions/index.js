@@ -70,7 +70,7 @@ export const addComment = (postId, commentData) => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.res.data
       })
     )
 }

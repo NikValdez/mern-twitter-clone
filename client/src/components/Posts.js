@@ -4,8 +4,13 @@ import { fetchPosts, deletePost, getPost } from '../actions'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import PostForm from './PostForm'
+import { Modal, Button } from 'react-bootstrap'
 
 class Posts extends Component {
+  state = {
+    show: false
+  }
   componentDidMount() {
     this.props.fetchPosts()
   }
@@ -17,10 +22,25 @@ class Posts extends Component {
     this.props.getPost(id)
   }
 
+  handleClose = () => {
+    this.setState({ show: false })
+  }
+
+  handleShow = () => {
+    this.setState({ show: true })
+  }
+
   render() {
     const { posts } = this.props.post
     return (
       <div className="container">
+        <Button
+          variant="primary"
+          onClick={this.handleShow}
+          className="tweet-button"
+        >
+          Teewt
+        </Button>
         {posts.map(({ _id, text, image, date }) => (
           <ul key={_id}>
             <div className="card card-body mb-3" style={{ width: '35rem' }}>
@@ -46,6 +66,16 @@ class Posts extends Component {
             </div>
           </ul>
         ))}
+
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <PostForm handleClose={this.handleClose} />
+          </Modal.Body>
+          <Modal.Footer />
+        </Modal>
       </div>
     )
   }

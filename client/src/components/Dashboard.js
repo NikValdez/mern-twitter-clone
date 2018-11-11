@@ -7,9 +7,6 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>Dashboard</h1>
-        <Link to="/new_post">
-          <button className="btn btn-primary twit-button">Fake Tweet</button>
-        </Link>
         <Posts />
       </div>
     )

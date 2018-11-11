@@ -3,18 +3,12 @@ import { connect } from 'react-redux'
 import { addPost } from '../actions'
 
 class PostForm extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      text: '',
-      textError: ''
-    }
-    this.onChange = this.onChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+  state = {
+    text: '',
+    textError: ''
   }
 
-  onChange(e) {
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -36,7 +30,7 @@ class PostForm extends Component {
     return isError
   }
 
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault()
 
     const { firstName, image } = this.props.auth
@@ -50,7 +44,6 @@ class PostForm extends Component {
       }
       this.props.addPost(newPost)
       this.setState({ text: '' })
-      this.props.history.push('/dashboard')
     }
   }
 
@@ -76,7 +69,11 @@ class PostForm extends Component {
                 </div>
               </div>
 
-              <button type="submit" className="btn btn-dark">
+              <button
+                type="submit"
+                className="btn btn-dark"
+                onClick={this.props.handleClose}
+              >
                 Submit
               </button>
             </form>
