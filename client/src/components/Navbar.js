@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Modal, Button } from 'react-bootstrap'
 
 class Navbar extends Component {
   renderContent() {
@@ -16,13 +17,21 @@ class Navbar extends Component {
           </ul>
         )
       default:
-        return [
-          <ul className="navbar-nav" key={this.props.auth._id}>
-            <li className="nav-item">
-              <a href="/api/logout">Logout</a>
-            </li>
-          </ul>
-        ]
+        return (
+          <div>
+            <ul className="navbar-nav" key={this.props.auth._id}>
+              <li className="nav-item">
+                <a href="/api/logout">Logout</a>
+              </li>
+              <Button
+                onClick={this.props.handleFormShow}
+                className="tweet-button"
+              >
+                Teewt
+              </Button>
+            </ul>
+          </div>
+        )
     }
   }
 
@@ -44,7 +53,7 @@ class Navbar extends Component {
           <i className="fab fa-twitter fa-lg" style={{ color: '#1da1f2' }} />
         </ul>
 
-        <ul className="navbar-nav">{this.renderContent()}</ul>
+        {this.renderContent()}
       </nav>
     )
   }

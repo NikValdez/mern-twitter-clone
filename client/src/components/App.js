@@ -7,7 +7,6 @@ import Navbar from './Navbar'
 import Landing from './Landing'
 import Posts from './Posts'
 import PostForm from './PostForm'
-import Post from './Post'
 
 import Dashboard from './Dashboard'
 
@@ -20,14 +19,9 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Navbar />
-          <div className="container">
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/posts" component={Posts} />
-            <Route exact path="/new_post" component={PostForm} />
-            <Route exact path="/posts/:id" component={Post} />
-          </div>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/posts" component={Posts} />
         </div>
       </BrowserRouter>
     )

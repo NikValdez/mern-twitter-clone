@@ -25,7 +25,6 @@ a {
 
 /* Buttons */
 .tweet-button {
-  float: right;
   background: #1da1f2;
   border-radius: 100px;
 }
@@ -37,4 +36,10 @@ a {
   color: #85144b;
   font-family: Gotham Narrow SS;
   font-size: 18px;
+}
+
+.posts-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -52,7 +52,7 @@ class PostForm extends Component {
       <div className="post-form mb-3">
         <div className="card card-info">
           <div className="card-header bg-info text-white">
-            TweetClone someting...
+            Teewt something...
           </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
@@ -72,7 +72,7 @@ class PostForm extends Component {
               <button
                 type="submit"
                 className="btn btn-dark"
-                onClick={this.props.handleClose}
+                onClick={this.props.handleFormClose}
               >
                 Submit
               </button>
