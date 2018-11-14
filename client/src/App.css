@@ -12,6 +12,10 @@ a {
   font-weight: bold;
 }
 
+body {
+  background: #e6ecf0;
+}
+
 .twitter-logo {
   margin: 5px;
 }
@@ -42,4 +46,24 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.comment-form-input {
+  height: 12rem;
+}
+
+.modal {
+  max-height: 30rem;
+}
+
+nav.navbar.navbar-light {
+  margin-bottom: 20px;
+}
+
+.tweet-hover:hover {
+  background: #e6ecf0;
+}
+
+.fa-angle-down {
+  margin-left: 8rem;
 }

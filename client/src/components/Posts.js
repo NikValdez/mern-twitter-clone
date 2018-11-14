@@ -50,24 +50,34 @@ class Posts extends Component {
           <div className="row posts-display">
             {posts.map(({ _id, text, image, date }) => (
               <ul key={_id}>
-                <div className="card card-body mb-3" style={{ width: '35rem' }}>
+                <div
+                  className="card card-body mb-3 tweet-hover"
+                  style={{ width: '35rem' }}
+                >
                   <div className="row">
                     <img src={image} alt="profile" className="profile-image" />
-                    <div className="mr-3">
-                      <h4 onClick={this.onGetPost.bind(this, _id)} />
-                      <h5 onClick={this.handleShow}>{text}</h5>
-                    </div>
-                    <div className="mr-3">
-                      {moment(date).format('MMMM Do YYYY')}
-                    </div>
-                    <button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
+                    <div
+                      className="mr-3"
+                      onClick={this.onGetPost.bind(this, _id)}
                     >
-                      Delete Post
-                    </button>
+                      <div onClick={this.onGetPost.bind(this, _id)}>
+                        <div onClick={this.handleShow}>
+                          {text}
+                          <p> {moment(date).format('MMMM Do YYYY')}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="angle-icon-container">
+                      <i class="fas  fa-angle-down " data-toggle="dropdown" />
+                      <div class="dropdown-menu">
+                        <button
+                          class="dropdown-item"
+                          onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                          Delete Post
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </ul>

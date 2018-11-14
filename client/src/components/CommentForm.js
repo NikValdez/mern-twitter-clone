@@ -35,29 +35,28 @@ class CommentForm extends Component {
   render() {
     const { errors } = this.state
     return (
-      <div className="post-form mb-3">
-        <div className="card card-info">
-          <div className="card-header bg-info text-white">comment...</div>
-          <div className="card-body">
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <input
-                  placeholder="Reply to post"
-                  name="text"
-                  value={this.state.text}
-                  onChange={this.onChange}
-                  error={errors.text}
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn btn-dark"
-                onClick={this.props.handleClose}
-              >
-                Submit
-              </button>
-            </form>
-          </div>
+      <div className="post-form mb-3" style={{ height: '25rem' }}>
+        <div className="card-header bg-info text-white">Comment...</div>
+        <div className="card-body">
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <input
+                placeholder="Reply to post"
+                className="form-control comment-form-input"
+                name="text"
+                value={this.state.text}
+                onChange={this.onChange}
+                error={errors.text}
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn btn-dark"
+              onClick={this.props.handleClose}
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     )
