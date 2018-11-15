@@ -64,14 +64,21 @@ class Posts extends Component {
                         <div onClick={this.handleShow}>
                           {text}
                           <p> {moment(date).format('MMMM Do YYYY')}</p>
+                          <i
+                            className="far fa-comment"
+                            onClick={this.handleCommentShow}
+                          />
                         </div>
                       </div>
                     </div>
                     <div className="angle-icon-container">
-                      <i class="fas  fa-angle-down " data-toggle="dropdown" />
-                      <div class="dropdown-menu">
+                      <i
+                        className="fas  fa-angle-down "
+                        data-toggle="dropdown"
+                      />
+                      <div className="dropdown-menu">
                         <button
-                          class="dropdown-item"
+                          className="dropdown-item"
                           onClick={this.onDeleteClick.bind(this, _id)}
                         >
                           Delete Post
@@ -85,12 +92,13 @@ class Posts extends Component {
 
             <Modal show={this.state.showForm} onHide={this.handleFormClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title className="modal-title">
+                  Compose a new Teewt
+                </Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <PostForm handleFormClose={this.handleFormClose} />
               </Modal.Body>
-              <Modal.Footer />
             </Modal>
 
             <Modal show={this.state.show} onHide={this.handleClose}>
@@ -100,7 +108,6 @@ class Posts extends Component {
               <Modal.Body>
                 <Post handleClose={this.handleClose} />
               </Modal.Body>
-              <Modal.Footer />
             </Modal>
           </div>
         </div>

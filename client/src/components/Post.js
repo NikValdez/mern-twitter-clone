@@ -28,13 +28,21 @@ class Post extends Component {
 
     const comm = _.map(post.comments, comment => (
       <li key={comment.date}>
+        <div className="angle-icon-container">
+          <i className="fas  fa-angle-down " data-toggle="dropdown" />
+          <div className="dropdown-menu">
+            <button
+              className="dropdown-item"
+              onClick={this.onDeleteClick.bind(this, post._id, comment._id)}
+            >
+              Delete Comment
+            </button>
+          </div>
+        </div>
         {comment.text}
         <br />
         {moment(comment.date).format('MMMM Do YYYY')}
         <br />
-        <button onClick={this.onDeleteClick.bind(this, post._id, comment._id)}>
-          Delete Comment
-        </button>
       </li>
     ))
 
@@ -49,18 +57,15 @@ class Post extends Component {
         <h6>Comments</h6>
         <div className="card">{comm}</div>
 
-        <Button variant="primary" onClick={this.handleShow}>
-          Add comment
-        </Button>
+        <i className="far fa-comment" onClick={this.handleShow} />
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Reply to Teewt</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <CommentForm postId={post._id} handleClose={this.handleClose} />
           </Modal.Body>
-          <Modal.Footer />
         </Modal>
       </div>
     )

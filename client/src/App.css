@@ -33,6 +33,14 @@ body {
   border-radius: 100px;
 }
 
+.tweet-button-modal {
+  background: #1da1f2;
+  border-radius: 100px;
+  float: right;
+  color: white;
+  padding: 5px;
+}
+
 .animated {
   animation-duration: 2.5s;
   margin-bottom: 20px;
@@ -66,4 +74,26 @@ nav.navbar.navbar-light {
 
 .fa-angle-down {
   margin-left: 8rem;
+}
+
+.far.fa-comment:hover {
+  font-size: 130%;
+  transition: 0.5s ease-out;
+}
+
+.angle-icon-container {
+  float: right;
+  margin-right: 5em;
+}
+
+.form-control {
+  height: 10rem;
+}
+
+.modal-title {
+  margin-left: 25%;
+}
+
+.modal-body {
+  background: #e6ecf0;
 }

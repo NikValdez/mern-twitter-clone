@@ -50,34 +50,29 @@ class PostForm extends Component {
   render() {
     return (
       <div className="post-form mb-3">
-        <div className="card card-info">
-          <div className="card-header bg-info text-white">
-            Teewt something...
-          </div>
-          <div className="card-body">
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <input
-                  className="form-control"
-                  placeholder="Create a post"
-                  name="text"
-                  value={this.state.text}
-                  onChange={this.onChange}
-                />
-                <div className="animated lightSpeedIn">
-                  {this.state.textError}
-                </div>
+        <div className="card-body">
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <input
+                className="form-control"
+                placeholder="Create a post"
+                name="text"
+                value={this.state.text}
+                onChange={this.onChange}
+              />
+              <div className="animated lightSpeedIn">
+                {this.state.textError}
               </div>
+            </div>
 
-              <button
-                type="submit"
-                className="btn btn-dark"
-                onClick={this.props.handleFormClose}
-              >
-                Submit
-              </button>
-            </form>
-          </div>
+            <button
+              type="submit"
+              className="tweet-button-modal"
+              onClick={this.props.handleFormClose}
+            >
+              Teewt
+            </button>
+          </form>
         </div>
       </div>
     )
