@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPosts, deletePost, getPost } from '../actions'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import moment from 'moment'
 import PostForm from './PostForm'
 import { Modal, Button } from 'react-bootstrap'
@@ -48,7 +47,7 @@ class Posts extends Component {
         <Navbar handleFormShow={this.handleFormShow} />
         <div className="container">
           <div className="row posts-display">
-            {posts.map(({ _id, text, image, date }) => (
+            {posts.map(({ _id, text, image, date, upload }) => (
               <ul key={_id}>
                 <div
                   className="card card-body mb-3 tweet-hover"
@@ -62,6 +61,14 @@ class Posts extends Component {
                     >
                       <div onClick={this.onGetPost.bind(this, _id)}>
                         <div onClick={this.handleShow}>
+                          {upload && (
+                            <img
+                              width="200"
+                              src={upload}
+                              alt="Upload"
+                              className="upload-small"
+                            />
+                          )}
                           {text}
                           <p> {moment(date).format('MMMM Do YYYY')}</p>
                           <i
@@ -103,7 +110,7 @@ class Posts extends Component {
 
             <Modal show={this.state.show} onHide={this.handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Teewt</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Post handleClose={this.handleClose} />

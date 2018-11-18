@@ -45,7 +45,7 @@ body {
   animation-duration: 2.5s;
   margin-bottom: 20px;
   margin-top: 5px;
-  color: #85144b;
+  color: #1da1f2;
   font-family: Gotham Narrow SS;
   font-size: 18px;
 }
@@ -96,4 +96,10 @@ nav.navbar.navbar-light {
 
 .modal-body {
   background: #e6ecf0;
+}
+
+/*image uploads */
+.upload-small {
+  height: 15%;
+  width: 15%;
 }

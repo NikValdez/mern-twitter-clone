@@ -14,18 +14,40 @@ class CommentForm extends Component {
     }
   }
 
+  validate = () => {
+    let isError = false
+    const errors = {}
+    if (this.state.text.length < 1 || this.state.text.length > 280) {
+      isError = true
+      errors.textError = 'Post must be between 1 and 280 characters'
+    }
+
+    if (isError) {
+      this.setState({
+        ...this.state,
+        ...errors
+      })
+    }
+
+    return isError
+  }
+
   onSubmit = e => {
     e.preventDefault()
     const { firstName, image } = this.props.auth
     const { postId } = this.props
 
-    const newComment = {
-      text: this.state.text,
-      name: firstName,
-      image: image
+    //check for errors
+    const err = this.validate()
+    if (!err) {
+      const newComment = {
+        text: this.state.text,
+        name: firstName,
+        image: image
+      }
+      this.props.addComment(postId, newComment)
+      this.setState({ text: '' })
     }
-    this.props.addComment(postId, newComment)
-    this.setState({ text: '' })
   }
 
   onChange = e => {
@@ -34,6 +56,25 @@ class CommentForm extends Component {
 
   render() {
     const { errors } = this.state
+    let button
+    if (this.state.text.length > 0 && this.state.text.length <= 280) {
+      button = (
+        <button
+          type="submit"
+          className="tweet-button-modal"
+          onClick={this.props.handleClose}
+        >
+          Reply
+        </button>
+      )
+    } else {
+      button = (
+        <div className="animated lightSpeedIn">
+          <p>Add your reply above 🖕</p>
+        </div>
+      )
+    }
+
     return (
       <div className="post-form mb-3" style={{ height: '25rem' }}>
         <div className="card-body">
@@ -48,13 +89,7 @@ class CommentForm extends Component {
                 error={errors.text}
               />
             </div>
-            <button
-              type="submit"
-              className="tweet-button-modal"
-              onClick={this.props.handleClose}
-            >
-              Reply
-            </button>
+            {button}
           </form>
         </div>
       </div>

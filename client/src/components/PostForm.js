@@ -5,6 +5,7 @@ import { addPost } from '../actions'
 class PostForm extends Component {
   state = {
     text: '',
+    upload: '',
     textError: ''
   }
 
@@ -40,14 +41,54 @@ class PostForm extends Component {
       const newPost = {
         text: this.state.text,
         name: firstName,
-        image: image
+        image: image,
+        upload: this.state.upload
       }
       this.props.addPost(newPost)
-      this.setState({ text: '' })
+      this.setState({ text: '', upload: '' })
     }
   }
 
+  uploadFile = async e => {
+    console.log('uploading file...')
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'sickfits') //name must match cloudinary name
+
+    const res = await fetch(
+      'https://api.cloudinary.com/v1_1/nikcochran/image/upload',
+      {
+        method: 'Post',
+        body: data
+      }
+    )
+    const file = await res.json()
+    console.log(file)
+    this.setState({
+      upload: file.secure_url
+    })
+  }
+
   render() {
+    let button
+    if (this.state.text.length > 0 && this.state.text.length <= 280) {
+      button = (
+        <button
+          type="submit"
+          className="tweet-button-modal"
+          onClick={this.props.handleFormClose}
+        >
+          Teewt
+        </button>
+      )
+    } else {
+      button = (
+        <div className="animated lightSpeedIn">
+          <p>Teewt above 🖕</p>
+        </div>
+      )
+    }
     return (
       <div className="post-form mb-3">
         <div className="card-body">
@@ -60,18 +101,20 @@ class PostForm extends Component {
                 value={this.state.text}
                 onChange={this.onChange}
               />
-              <div className="animated lightSpeedIn">
-                {this.state.textError}
-              </div>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                placeholder="Upload an image"
+                required
+                onChange={this.uploadFile}
+              />
+              {this.state.upload && (
+                <img width="200" src={this.state.upload} alt="Upload Preview" />
+              )}
             </div>
 
-            <button
-              type="submit"
-              className="tweet-button-modal"
-              onClick={this.props.handleFormClose}
-            >
-              Teewt
-            </button>
+            {button}
           </form>
         </div>
       </div>

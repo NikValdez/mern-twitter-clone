@@ -40,7 +40,8 @@ router.post('/', (req, res) => {
   const newPost = new Post({
     text: req.body.text,
     name: req.body.name,
-    image: req.body.image
+    image: req.body.image,
+    upload: req.body.upload
   })
 
   newPost.save().then(post => res.json(post))

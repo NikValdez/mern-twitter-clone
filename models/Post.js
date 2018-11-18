@@ -14,6 +14,9 @@ const PostSchema = new Schema({
   name: {
     type: String
   },
+  upload: {
+    type: String
+  },
   image: {
     type: String
   },

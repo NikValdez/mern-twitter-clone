@@ -48,9 +48,9 @@ class Post extends Component {
 
     return (
       <div>
-        <h4>Tweet</h4>
         <div className="card">
           <h4>{post.text}</h4>
+          <img src={post.upload} alt="Large Image upload" />
           <p> {moment(post.date).format('MMMM Do YYYY')}</p>
         </div>
 
@@ -59,7 +59,11 @@ class Post extends Component {
 
         <i className="far fa-comment" onClick={this.handleShow} />
 
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal
+          show={this.state.show}
+          onHide={this.handleClose}
+          className="comment-modal"
+        >
           <Modal.Header closeButton>
             <Modal.Title>Reply to Teewt</Modal.Title>
           </Modal.Header>
