@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Modal, Button } from 'react-bootstrap'
+import SearchBox from './SearchBox'
 
 class Navbar extends Component {
   renderContent() {
@@ -18,19 +19,31 @@ class Navbar extends Component {
         )
       default:
         return (
-          <div>
-            <ul className="navbar-nav" key={this.props.auth._id}>
-              <li className="nav-item">
-                <a href="/api/logout">Logout</a>
-              </li>
-              <Button
-                onClick={this.props.handleFormShow}
-                className="tweet-button"
-              >
-                Teewt
-              </Button>
+          <>
+            <ul>
+              <SearchBox />
             </ul>
-          </div>
+
+            <ul className="twitter-logo">
+              <i
+                className="fab fa-twitter fa-lg"
+                style={{ color: '#1da1f2' }}
+              />
+            </ul>
+            <div className="dropdown">
+              <img
+                src={this.props.auth.image}
+                alt=""
+                className="profile-image dropdown-toggle"
+                data-toggle="dropdown"
+              />
+              <span className="dropdown-menu logout">
+                <ul className="dropdown" key={this.props.auth._id}>
+                  <a href="/api/logout">Logout</a>
+                </ul>
+              </span>
+            </div>
+          </>
         )
     }
   }
@@ -38,8 +51,12 @@ class Navbar extends Component {
   render() {
     return (
       <nav
-        className="navbar navbar-light"
-        style={{ backgroundColor: '#fff', borderBottom: '1px solid #80808094' }}
+        className="navbar navbar-light bg-light justify-content-between"
+        style={{
+          backgroundColor: '#fff',
+          borderBottom: '1px solid #80808094',
+          maxHeight: '5rem'
+        }}
       >
         <Link
           to={this.props.auth ? '/dashboard' : '/'}
@@ -49,11 +66,11 @@ class Navbar extends Component {
           Home
         </Link>
 
-        <ul className="twitter-logo">
-          <i className="fab fa-twitter fa-lg" style={{ color: '#1da1f2' }} />
-        </ul>
-
         {this.renderContent()}
+
+        <Button onClick={this.props.handleFormShow} className="tweet-button">
+          Teewt
+        </Button>
       </nav>
     )
   }

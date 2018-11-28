@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPosts, deletePost, getPost } from '../actions'
+import {
+  fetchPosts,
+  deletePost,
+  getPost,
+  addLike,
+  removeLike
+} from '../actions'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import PostForm from './PostForm'
@@ -16,6 +22,7 @@ class Posts extends Component {
   componentDidMount() {
     this.props.fetchPosts()
   }
+
   onDeleteClick = id => {
     this.props.deletePost(id)
   }
@@ -40,62 +47,102 @@ class Posts extends Component {
     this.setState({ showForm: true })
   }
 
+  onLike = id => {
+    const { posts } = this.props.post
+    const newLike = {
+      count: this.props.auth._id
+    }
+
+    this.props.addLike(id, newLike)
+    setTimeout(() => {
+      this.props.fetchPosts()
+    }, 300)
+  }
+
   render() {
     const { posts } = this.props.post
+    const { auth } = this.props
     return (
       <div>
         <Navbar handleFormShow={this.handleFormShow} />
         <div className="container">
           <div className="row posts-display">
-            {posts.map(({ _id, text, image, date, upload }) => (
-              <ul key={_id}>
-                <div
-                  className="card card-body mb-3 tweet-hover"
-                  style={{ width: '35rem' }}
-                >
-                  <div className="row">
-                    <img src={image} alt="profile" className="profile-image" />
-                    <div
-                      className="mr-3"
-                      onClick={this.onGetPost.bind(this, _id)}
-                    >
-                      <div onClick={this.onGetPost.bind(this, _id)}>
-                        <div onClick={this.handleShow}>
-                          {upload && (
-                            <img
-                              width="200"
-                              src={upload}
-                              alt="Upload"
-                              className="upload-small"
+            {posts.map(
+              ({ _id, text, image, date, upload, comments, likes, name }) => (
+                <ul key={_id}>
+                  <div
+                    className="card card-body mb-3 tweet-hover"
+                    style={{ width: '35rem' }}
+                  >
+                    <img
+                      src={image}
+                      alt="profile image"
+                      className="tweet-card-image"
+                    />
+                    <div className="row">
+                      <div className="mr-3">
+                        <div onClick={this.onGetPost.bind(this, _id)}>
+                          {name === auth.firstName ? (
+                            <div className="angle-icon-container">
+                              <i
+                                className="fas  fa-angle-down "
+                                data-toggle="dropdown"
+                              />
+                              <div className="dropdown-menu">
+                                <button
+                                  className="dropdown-item"
+                                  onClick={this.onDeleteClick.bind(this, _id)}
+                                >
+                                  Delete Post
+                                </button>
+                              </div>
+                            </div>
+                          ) : null}
+                          <div onClick={this.handleShow}>
+                            {text}
+                            {upload && (
+                              <img
+                                width="200"
+                                src={upload}
+                                alt="Upload"
+                                className="upload-small"
+                              />
+                            )}
+                            <p className="date">
+                              {' '}
+                              {moment(date).format('MMMM Do YYYY')}
+                            </p>
+                            <i
+                              className="far fa-comment"
+                              onClick={this.handleCommentShow}
                             />
-                          )}
-                          {text}
-                          <p> {moment(date).format('MMMM Do YYYY')}</p>
-                          <i
-                            className="far fa-comment"
-                            onClick={this.handleCommentShow}
-                          />
+                            <span className="comment-count">
+                              {comments.length ? comments.length : null}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div className="angle-icon-container">
-                      <i
-                        className="fas  fa-angle-down "
-                        data-toggle="dropdown"
-                      />
-                      <div className="dropdown-menu">
-                        <button
-                          className="dropdown-item"
-                          onClick={this.onDeleteClick.bind(this, _id)}
-                        >
-                          Delete Post
-                        </button>
+                        {likes.find(like => like.count === auth._id) ? (
+                          <i
+                            className="fas fa-heart" //Solid heart
+                          />
+                        ) : (
+                          <i
+                            className="far fa-heart" //empty heart
+                            onClick={this.onLike.bind(this, _id)}
+                          />
+                        )}
+
+                        <span />
+
+                        <span className="like-count">
+                          {likes.length ? likes.length : null}
+                        </span>
                       </div>
                     </div>
                   </div>
-                </div>
-              </ul>
-            ))}
+                </ul>
+              )
+            )}
 
             <Modal show={this.state.showForm} onHide={this.handleFormClose}>
               <Modal.Header closeButton>
@@ -129,10 +176,11 @@ Posts.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  auth: state.auth
 })
 
 export default connect(
   mapStateToProps,
-  { fetchPosts, deletePost, getPost }
+  { fetchPosts, deletePost, getPost, addLike, removeLike }
 )(Posts)

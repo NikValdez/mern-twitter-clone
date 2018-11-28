@@ -27,35 +27,39 @@ class Post extends Component {
     const { post } = this.props.post
 
     const comm = _.map(post.comments, comment => (
-      <li key={comment.date}>
-        <div className="angle-icon-container">
-          <i className="fas  fa-angle-down " data-toggle="dropdown" />
-          <div className="dropdown-menu">
-            <button
-              className="dropdown-item"
-              onClick={this.onDeleteClick.bind(this, post._id, comment._id)}
-            >
-              Delete Comment
-            </button>
+      <div className="card comments" key={comment._id}>
+        <li>
+          <div className="angle-icon-container">
+            <i className="fas  fa-angle-down " data-toggle="dropdown" />
+            <div className="dropdown-menu">
+              <button
+                className="dropdown-item"
+                onClick={this.onDeleteClick.bind(this, post._id, comment._id)}
+              >
+                Delete Comment
+              </button>
+            </div>
           </div>
-        </div>
-        {comment.text}
-        <br />
-        {moment(comment.date).format('MMMM Do YYYY')}
-        <br />
-      </li>
+          {comment.text}
+          <br />
+          <span className="date">
+            {moment(comment.date).format('MMMM Do YYYY')}
+          </span>
+          <br />
+        </li>
+      </div>
     ))
 
     return (
       <div>
         <div className="card">
           <h4>{post.text}</h4>
-          <img src={post.upload} alt="Large Image upload" />
-          <p> {moment(post.date).format('MMMM Do YYYY')}</p>
+          {post.upload && <img width="200" src={post.upload} alt="Upload" />}
+          <p className="date"> {moment(post.date).format('MMMM Do YYYY')}</p>
         </div>
 
         <h6>Comments</h6>
-        <div className="card">{comm}</div>
+        {comm}
 
         <i className="far fa-comment" onClick={this.handleShow} />
 

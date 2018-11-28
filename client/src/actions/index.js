@@ -92,3 +92,33 @@ export const deleteComment = (postId, commentId) => dispatch => {
       })
     )
 }
+
+export const addLike = (postId, likeData) => dispatch => {
+  axios
+    .post(`/api/posts/like/${postId}`, likeData)
+    .then(res =>
+      dispatch({
+        type: GET_POST,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.res.data
+      })
+    )
+}
+
+// Remove Like
+export const removeLike = id => dispatch => {
+  axios
+    .post(`/api/posts/unlike/${id}`)
+    .then(res => dispatch(fetchPosts()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
+}

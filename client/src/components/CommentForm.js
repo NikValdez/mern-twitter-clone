@@ -8,12 +8,6 @@ class CommentForm extends Component {
     errors: {}
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors })
-    }
-  }
-
   validate = () => {
     let isError = false
     const errors = {}
@@ -80,7 +74,7 @@ class CommentForm extends Component {
         <div className="card-body">
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-              <input
+              <textarea
                 placeholder="Reply to post"
                 className="form-control comment-form-input"
                 name="text"

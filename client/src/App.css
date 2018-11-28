@@ -7,7 +7,7 @@ a:hover {
 .fa-home,
 .brand-logo,
 a {
-  color: #0084b4;
+  color: #1da1f2;
   margin-right: 5px;
   font-weight: bold;
 }
@@ -17,7 +17,11 @@ body {
 }
 
 .twitter-logo {
-  margin: 5px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
 }
 
 .profile-image {
@@ -25,6 +29,10 @@ body {
   width: 5%;
   border-radius: 50%;
   margin-right: 15px;
+}
+
+img.profile-image {
+  float: right;
 }
 
 /* Buttons */
@@ -70,20 +78,29 @@ nav.navbar.navbar-light {
 
 .tweet-hover:hover {
   background: #e6ecf0;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
 }
 
 .fa-angle-down {
-  margin-left: 8rem;
+  margin-left: 15rem;
 }
 
-.far.fa-comment:hover {
+.far.fa-comment:hover,
+.fa-heart:hover {
   font-size: 130%;
   transition: 0.5s ease-out;
 }
 
+.far.fa-comment {
+  margin-left: 2rem;
+}
 .angle-icon-container {
   float: right;
   margin-right: 5em;
+}
+
+.angle-icon-container:hover {
+  color: #1da1f2;
 }
 
 .form-control {
@@ -102,4 +119,148 @@ nav.navbar.navbar-light {
 .upload-small {
   height: 15%;
   width: 15%;
+  margin-left: 5rem;
+}
+
+.inputFile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-upload-button {
+  font-size: 0.75em;
+  font-weight: 700;
+  color: white;
+  background-color: #1da1f2;
+  padding: 5px;
+  display: inline-block;
+}
+
+.file-upload-button:hover {
+  background: #034f7d;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 5px 40px -10px #034f7d;
+  -moz-box-shadow: 0px 5px 40px -10px #034f7d;
+  box-shadow: 5px 40px -10px#034f7d;
+  transition: all 0.4s ease 0s;
+}
+
+.logout {
+  margin-left: 20rem;
+  padding: 0;
+}
+
+/* comments */
+
+.comments {
+  margin-bottom: 1rem;
+}
+.comments:hover {
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* date */
+
+.date {
+  font-size: 12px;
+  font-family: 'New Baskerville';
+}
+
+.comment-count,
+.like-count {
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.fa-heart {
+  margin-left: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-auto-rows: 50vmax;
+  overflow: hidden;
+}
+
+.grid-item {
+  background: white;
+  text-align: center;
+}
+
+.grid-item1 {
+  background-image: url('Twitter.png');
+  text-align: center;
+}
+
+/* google button  */
+.ui.button,
+.google-auth__button {
+  padding: 12px 16px;
+  background: #ffffff;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 2px;
+  font-size: 16px;
+  line-height: 1.5em;
+  letter-spacing: 0.22px;
+  color: rgba(0, 0, 0, 0.54);
+  margin-bottom: 35rem;
+}
+.google-auth__logo {
+  display: inline-block;
+  margin-right: 16px;
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+  vertical-align: top;
+}
+.google-auth__button:hover {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+}
+
+.stage {
+  height: 100%;
+}
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-title {
+  margin-top: 13rem;
+}
+
+.tweet-card-name {
+  margin-left: 24rem;
+}
+
+.tweet-card-image {
+  margin-left: 24rem;
+  height: 5%;
+  width: 10%;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+/* downshift  */
+
+.downshift-dropdown {
+  width: 20rem !important;
+  background: #b7e1f5c4;
+}
+
+.dropdown-button {
+  padding: 0.6rem;
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.search {
+  height: 2.5rem;
 }

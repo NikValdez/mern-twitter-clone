@@ -7,6 +7,7 @@ const cookieSession = require('cookie-session')
 //Load models
 require('./models/User')
 const posts = require('./routes/api/posts')
+const profile = require('./routes/api/profile')
 
 require('./config/passport')(passport)
 
@@ -36,6 +37,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use('/api/profile', profile)
 require('./routes/auth')(app)
 app.use('/api/posts', posts)
 

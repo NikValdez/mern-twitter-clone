@@ -7,6 +7,7 @@ import Navbar from './Navbar'
 import Landing from './Landing'
 import Posts from './Posts'
 import PostForm from './PostForm'
+import SearchBox from './SearchBox'
 
 import Dashboard from './Dashboard'
 
@@ -19,7 +20,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Route exact path="/" component={Landing} />
+          {!this.props.auth ? (
+            <Route exact path="/" component={Landing} />
+          ) : (
+            <Route exact path="/" component={Dashboard} />
+          )}
+
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/posts" component={Posts} />
         </div>
@@ -28,7 +34,11 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(App)

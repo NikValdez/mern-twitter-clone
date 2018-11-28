@@ -20,6 +20,18 @@ const PostSchema = new Schema({
   image: {
     type: String
   },
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+      },
+      count: {
+        type: String,
+        required: true
+      }
+    }
+  ],
   comments: [
     {
       user: {

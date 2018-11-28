@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addPost } from '../actions'
+import Pacman from '../images/Pacman.gif'
 
 class PostForm extends Component {
   state = {
     text: '',
     upload: '',
-    textError: ''
+    textError: '',
+    loading: false
   }
 
   onChange = e => {
@@ -50,6 +52,9 @@ class PostForm extends Component {
   }
 
   uploadFile = async e => {
+    this.setState({
+      loading: true
+    })
     console.log('uploading file...')
     const files = e.target.files
     const data = new FormData()
@@ -66,7 +71,8 @@ class PostForm extends Component {
     const file = await res.json()
     console.log(file)
     this.setState({
-      upload: file.secure_url
+      upload: file.secure_url,
+      loading: false
     })
   }
 
@@ -85,7 +91,7 @@ class PostForm extends Component {
     } else {
       button = (
         <div className="animated lightSpeedIn">
-          <p>Teewt above 🖕</p>
+          <span>Teewt above 🖕</span>
         </div>
       )
     }
@@ -94,21 +100,26 @@ class PostForm extends Component {
         <div className="card-body">
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-              <input
+              <textarea
                 className="form-control"
                 placeholder="Create a post"
                 name="text"
                 value={this.state.text}
                 onChange={this.onChange}
               />
+              <label htmlFor="file" className="file-upload-button ">
+                <i className="fas fa-file-upload" /> Upload Image
+              </label>
               <input
                 type="file"
                 id="file"
                 name="file"
                 placeholder="Upload an image"
-                required
                 onChange={this.uploadFile}
+                className="inputFile"
               />
+              {this.state.loading ? <img src={Pacman} alt="loading" /> : ''}
+
               {this.state.upload && (
                 <img width="200" src={this.state.upload} alt="Upload Preview" />
               )}
