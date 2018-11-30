@@ -1,20 +1,36 @@
 import React, { Component } from 'react'
 import Downshift from 'downshift'
+import { Modal } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { fetchPosts, getPost } from '../actions'
+import Post from './Post'
 
 class SearchBox extends Component {
+  state = {
+    show: false,
+    searchText: '',
+    showForm: false
+  }
   componentDidMount() {
     this.props.fetchPosts()
   }
+
+  handleClose = () => {
+    this.setState({ show: false })
+  }
+  onSelect = id => {
+    this.setState({
+      show: true,
+      searchText: ''
+    })
+  }
+
+  onGetPost = id => {
+    this.props.getPost(id)
+  }
+
   render() {
     const { posts } = this.props.post
-    console.log(posts)
-
-    const onChange = selectedBook => {
-      alert(`your favourite book is ${selectedBook.text}`)
-    }
-
     return (
       <div
         style={{
@@ -26,7 +42,7 @@ class SearchBox extends Component {
         }}
       >
         <Downshift
-          onChange={onChange}
+          onChange={this.onSelect}
           itemToString={posts => (posts ? posts.text : '')}
         >
           {({
@@ -35,9 +51,7 @@ class SearchBox extends Component {
             isOpen,
             inputValue,
             highlightedIndex,
-            selectedItem,
-            highlightedItem,
-            getLabelProps
+            selectedItem
           }) => (
             <div>
               <input
@@ -66,11 +80,21 @@ class SearchBox extends Component {
                           fontWeight: selectedItem === item ? 'bold' : 'normal'
                         }}
                       >
-                        {item.text}
+                        <div onClick={this.onGetPost.bind(this, item._id)}>
+                          {item.text}
+                        </div>
                       </div>
                     ))}
                 </div>
               ) : null}
+              <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Teewt</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {<Post handleClose={this.handleClose} />}
+                </Modal.Body>
+              </Modal>
             </div>
           )}
         </Downshift>

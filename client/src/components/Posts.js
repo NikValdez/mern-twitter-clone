@@ -10,7 +10,7 @@ import {
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import PostForm from './PostForm'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import Post from './Post'
 import Navbar from './Navbar'
 
