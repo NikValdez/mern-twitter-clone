@@ -30,7 +30,9 @@ class Post extends Component {
       <div className="card comments" key={comment._id}>
         <li>
           <div className="angle-icon-container">
-            <i className="fas  fa-angle-down " data-toggle="dropdown" />
+            {comment.name === this.props.auth.firstName ? (
+              <i className="fas  fa-angle-down " data-toggle="dropdown" />
+            ) : null}
             <div className="dropdown-menu">
               <button
                 className="dropdown-item"
@@ -58,7 +60,7 @@ class Post extends Component {
           <p className="date"> {moment(post.date).format('MMMM Do YYYY')}</p>
         </div>
 
-        <h6>Comments</h6>
+        <h6 className="comment-title">Comments</h6>
         {comm}
 
         <i className="far fa-comment" onClick={this.handleShow} />
@@ -81,7 +83,8 @@ class Post extends Component {
 }
 
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  auth: state.auth
 })
 
 export default connect(

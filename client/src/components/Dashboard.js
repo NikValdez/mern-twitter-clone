@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Posts from './Posts'
 import { Link } from 'react-router-dom'
-import Post from './Post'
+import Profile from './Profile'
 
 class Dashboard extends Component {
   render() {

@@ -13,6 +13,7 @@ import PostForm from './PostForm'
 import { Modal } from 'react-bootstrap'
 import Post from './Post'
 import Navbar from './Navbar'
+import Profile from './Profile'
 
 class Posts extends Component {
   state = {
@@ -62,16 +63,19 @@ class Posts extends Component {
   render() {
     const { posts } = this.props.post
     const { auth } = this.props
+
     return (
       <div>
         <Navbar handleFormShow={this.handleFormShow} />
         <div className="container">
-          <div className="row posts-display">
+          <div className="row">
+            <Profile />
+
             {posts.map(
               ({ _id, text, image, date, upload, comments, likes, name }) => (
                 <ul key={_id}>
                   <div
-                    className="card card-body mb-3 tweet-hover"
+                    className="card card-body mb-3 tweet-hover col-12 "
                     style={{ width: '35rem' }}
                   >
                     <img
@@ -79,6 +83,7 @@ class Posts extends Component {
                       alt="profile image"
                       className="tweet-card-image"
                     />
+
                     <div className="row">
                       <div className="mr-3">
                         <div onClick={this.onGetPost.bind(this, _id)}>
@@ -112,13 +117,15 @@ class Posts extends Component {
                               {' '}
                               {moment(date).format('MMMM Do YYYY')}
                             </p>
-                            <i
-                              className="far fa-comment"
-                              onClick={this.handleCommentShow}
-                            />
-                            <span className="comment-count">
-                              {comments.length ? comments.length : null}
-                            </span>
+                            <div className="comment">
+                              <i
+                                className="far fa-comment"
+                                onClick={this.handleCommentShow}
+                              />
+                              <span className="comment-count">
+                                {comments.length ? comments.length : null}
+                              </span>
+                            </div>
                           </div>
                         </div>
                         {likes.find(like => like.count === auth._id) ? (

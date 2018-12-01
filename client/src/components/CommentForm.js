@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addComment, getPost } from '../actions'
+import { addComment, getPost, fetchPosts } from '../actions'
 
 class CommentForm extends Component {
   state = {
@@ -41,6 +41,9 @@ class CommentForm extends Component {
       }
       this.props.addComment(postId, newComment)
       this.setState({ text: '' })
+      setTimeout(() => {
+        this.props.fetchPosts()
+      }, 300)
     }
   }
 
@@ -98,5 +101,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addComment, getPost }
+  { addComment, getPost, fetchPosts }
 )(CommentForm)

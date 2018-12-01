@@ -13,6 +13,9 @@ const ProfileSchema = new Schema({
   bio: {
     type: String
   },
+  pic: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now

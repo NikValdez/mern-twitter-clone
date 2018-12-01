@@ -30,6 +30,12 @@ body {
   border-radius: 50%;
   margin-right: 15px;
 }
+.profile-pic {
+  height: 50%;
+  width: 50%;
+  border-radius: 50%;
+  margin-right: 15px;
+}
 
 img.profile-image {
   float: right;
@@ -37,12 +43,16 @@ img.profile-image {
 
 /* Buttons */
 .tweet-button {
-  background: #1da1f2;
+  background: #329cc3;
   border-radius: 100px;
+  border: none;
+}
+.tweet-button:hover {
+  background: #2a88ab;
 }
 
 .tweet-button-modal {
-  background: #1da1f2;
+  background: #329cc3;
   border-radius: 100px;
   float: right;
   color: white;
@@ -90,9 +100,15 @@ nav.navbar.navbar-light {
   font-size: 130%;
   transition: 0.5s ease-out;
 }
+.comment-title {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
 
-.far.fa-comment {
-  margin-left: 2rem;
+.comment {
+  margin-left: 1rem;
+  position: absolute;
+  bottom: 18px;
 }
 .angle-icon-container {
   float: right;
@@ -156,9 +172,6 @@ nav.navbar.navbar-light {
 
 /* comments */
 
-.comments {
-  margin-bottom: 1rem;
-}
 .comments:hover {
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
 }
@@ -177,7 +190,7 @@ nav.navbar.navbar-light {
 }
 
 .fa-heart {
-  margin-left: 10px;
+  margin-left: 25rem;
 }
 
 .grid-container {
@@ -263,4 +276,8 @@ nav.navbar.navbar-light {
 
 .search {
   height: 2.5rem;
+}
+
+.date {
+  margin-bottom: 5rem;
 }
