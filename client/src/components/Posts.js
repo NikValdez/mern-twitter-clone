@@ -70,12 +70,23 @@ class Posts extends Component {
         <div className="container">
           <div className="row">
             <Profile />
+            <div
+              className="card"
+              style={{
+                width: '34rem',
+                marginLeft: '5rem',
+                height: '13rem',
+                marginBottom: '2rem'
+              }}
+            >
+              <PostForm />
+            </div>
 
             {posts.map(
               ({ _id, text, image, date, upload, comments, likes, name }) => (
-                <ul key={_id}>
+                <ul key={_id} className="tweet-card">
                   <div
-                    className="card card-body mb-3 tweet-hover col-12 "
+                    className="card card-body mb-3 tweet-hover"
                     style={{ width: '35rem' }}
                   >
                     <img
@@ -84,68 +95,64 @@ class Posts extends Component {
                       className="tweet-card-image"
                     />
 
-                    <div className="row">
-                      <div className="mr-3">
-                        <div onClick={this.onGetPost.bind(this, _id)}>
-                          {name === auth.firstName ? (
-                            <div className="angle-icon-container">
-                              <i
-                                className="fas  fa-angle-down "
-                                data-toggle="dropdown"
-                              />
-                              <div className="dropdown-menu">
-                                <button
-                                  className="dropdown-item"
-                                  onClick={this.onDeleteClick.bind(this, _id)}
-                                >
-                                  Delete Post
-                                </button>
-                              </div>
-                            </div>
-                          ) : null}
-                          <div onClick={this.handleShow}>
-                            {text}
-                            {upload && (
-                              <img
-                                width="200"
-                                src={upload}
-                                alt="Upload"
-                                className="upload-small"
-                              />
-                            )}
-                            <p className="date">
-                              {' '}
-                              {moment(date).format('MMMM Do YYYY')}
-                            </p>
-                            <div className="comment">
-                              <i
-                                className="far fa-comment"
-                                onClick={this.handleCommentShow}
-                              />
-                              <span className="comment-count">
-                                {comments.length ? comments.length : null}
-                              </span>
-                            </div>
+                    <div onClick={this.onGetPost.bind(this, _id)}>
+                      {name === auth.firstName ? (
+                        <div className="angle-icon-container">
+                          <i
+                            className="fas  fa-angle-down "
+                            data-toggle="dropdown"
+                          />
+                          <div className="dropdown-menu">
+                            <button
+                              className="dropdown-item"
+                              onClick={this.onDeleteClick.bind(this, _id)}
+                            >
+                              Delete Post
+                            </button>
                           </div>
                         </div>
-                        {likes.find(like => like.count === auth._id) ? (
-                          <i
-                            className="fas fa-heart" //Solid heart
-                          />
-                        ) : (
-                          <i
-                            className="far fa-heart" //empty heart
-                            onClick={this.onLike.bind(this, _id)}
+                      ) : null}
+                      <div onClick={this.handleShow}>
+                        <p className="tweet-text">{text}</p>
+                        {upload && (
+                          <img
+                            width="200"
+                            src={upload}
+                            alt="Upload"
+                            className="upload-small"
                           />
                         )}
-
-                        <span />
-
-                        <span className="like-count">
-                          {likes.length ? likes.length : null}
-                        </span>
+                        <p className="date tweet-text">
+                          {' '}
+                          {moment(date).format('MMMM Do YYYY')}
+                        </p>
+                        <div className="comment">
+                          <i
+                            className="far fa-comment"
+                            onClick={this.handleCommentShow}
+                          />
+                          <span className="comment-count">
+                            {comments.length ? comments.length : null}
+                          </span>
+                        </div>
                       </div>
                     </div>
+                    {likes.find(like => like.count === auth._id) ? (
+                      <i
+                        className="fas fa-heart" //Solid heart
+                      />
+                    ) : (
+                      <i
+                        className="far fa-heart" //empty heart
+                        onClick={this.onLike.bind(this, _id)}
+                      />
+                    )}
+
+                    <span />
+
+                    <span className="like-count">
+                      {likes.length ? likes.length : null}
+                    </span>
                   </div>
                 </ul>
               )

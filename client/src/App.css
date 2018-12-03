@@ -31,10 +31,15 @@ body {
   margin-right: 15px;
 }
 .profile-pic {
-  height: 50%;
-  width: 50%;
+  height: 30%;
+  width: 30%;
   border-radius: 50%;
   margin-right: 15px;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+.profile-name {
+  margin-left: 1rem;
 }
 
 img.profile-image {
@@ -120,7 +125,7 @@ nav.navbar.navbar-light {
 }
 
 .form-control {
-  height: 10rem;
+  height: 6rem;
 }
 
 .modal-title {
@@ -133,8 +138,8 @@ nav.navbar.navbar-light {
 
 /*image uploads */
 .upload-small {
-  height: 15%;
-  width: 15%;
+  height: 20%;
+  width: 20%;
   margin-left: 5rem;
 }
 
@@ -248,8 +253,8 @@ nav.navbar.navbar-light {
   margin-top: 13rem;
 }
 
-.tweet-card-name {
-  margin-left: 24rem;
+.tweet-card {
+  margin-left: 20rem;
 }
 
 .tweet-card-image {
@@ -281,3 +286,21 @@ nav.navbar.navbar-light {
 .date {
   margin-bottom: 5rem;
 }
+
+.tweet-text {
+  margin-left: 2rem;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+
+.tweet-card {
+  position: relative;
+  top: -32rem;
+}
+/* .tweet-card:nth-child(4) {
+  position: relative;
+  top: -10rem;
+} */

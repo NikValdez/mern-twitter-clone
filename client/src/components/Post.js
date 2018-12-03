@@ -55,12 +55,15 @@ class Post extends Component {
     return (
       <div>
         <div className="card">
-          <h4>{post.text}</h4>
+          <h4 className="tweet-text">{post.text}</h4>
           {post.upload && <img width="200" src={post.upload} alt="Upload" />}
-          <p className="date"> {moment(post.date).format('MMMM Do YYYY')}</p>
+          <p className="date tweet-text">
+            {' '}
+            {moment(post.date).format('MMMM Do YYYY')}
+          </p>
         </div>
 
-        <h6 className="comment-title">Comments</h6>
+        <h6 className="comment-title tweet-text">Comments</h6>
         {comm}
 
         <i className="far fa-comment" onClick={this.handleShow} />

@@ -102,7 +102,7 @@ class PostForm extends Component {
             <div className="form-group">
               <textarea
                 className="form-control"
-                placeholder="Create a post"
+                placeholder="Teewt Something..."
                 name="text"
                 value={this.state.text}
                 onChange={this.onChange}
