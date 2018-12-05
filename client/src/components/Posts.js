@@ -14,6 +14,7 @@ import { Modal } from 'react-bootstrap'
 import Post from './Post'
 import Navbar from './Navbar'
 import Profile from './Profile'
+import FrontPagePostForm from './FrontPagePostForm'
 
 class Posts extends Component {
   state = {
@@ -79,7 +80,7 @@ class Posts extends Component {
                 marginBottom: '2rem'
               }}
             >
-              <PostForm />
+              <FrontPagePostForm />
             </div>
 
             {posts.map(
